@@ -1,10 +1,23 @@
 import express from 'express';
 import crypto from 'crypto';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import UserRouter from './src/routes/UserRoute.js';
 
-const PORT = 3000;
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
 const app = express();
+
+mongoose
+  .connect(process.env.DATABASE_URL)
+  .then(() => {
+    console.log('MongoDB Connected!');
+  })
+  .catch((error) => {
+    console.log({ error });
+  });
 
 app.use(express.json());
 app.use(morgan('dev'));
