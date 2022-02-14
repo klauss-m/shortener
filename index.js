@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import UserRouter from './src/routes/UserRoute.js';
+import ShortenerRouter from './src/routes/ShortenerRouter.js';
 
 dotenv.config();
 
@@ -21,7 +22,8 @@ mongoose
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use('/api', UserRouter);
+app.use(UserRouter);
+app.use(ShortenerRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

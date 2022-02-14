@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import ShortenerController from '../controller/ShortenerController';
+import ShortenerController from '../controller/ShortenerController.js';
 
 const router = Router();
 const shortenerController = new ShortenerController();
 
-router.get('/shortener', shortenerController.index);
-router.get('/shortener/:id', shortenerController.getOne);
-router.post('/shortener', shortenerController.store);
-router.put('/shortener/:id', shortenerController.update);
-router.delete('/shortener/:id', shortenerController.remove);
+router.get('/:hash', shortenerController.redirect);
+router.get('/api/shortener', shortenerController.index);
+router.get('/api/shortener/:id', shortenerController.getOne);
+router.post('/api/shortener', shortenerController.store);
+router.put('/api/shortener/:id', shortenerController.update);
+router.delete('/api/shortener/:id', shortenerController.remove);
 
 export default router;
